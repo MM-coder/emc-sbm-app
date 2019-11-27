@@ -8,10 +8,10 @@ SBM stands for **S**tudent **B**oard **M**eetings witch are monthly meetings tha
 ~~Boredom~~ I made this to help all the members of these SBMs organize the meetings better. From here you will be able to confirm your presence, vote on topics and create proposals for others to vote on.
 
 ### Checklist
-* [ ] Make desktop website
+* [x] Make desktop website
 * [ ] Make mobile website
 * [ ] Allow for propsal creation
-* [ ] User logins
+* [x] User logins
 * [ ] Automatic uploading of a meeting's occurences
 
 ### License
