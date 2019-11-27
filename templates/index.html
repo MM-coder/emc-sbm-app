@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - UIkit 3 KickOff</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='animations.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}"> 
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="uk-container">
+            <div class="uk-position-top">
+                <nav class="uk-navbar-container uk-navbar-transparent uk-light" style="margin: 10px;" uk-navbar>
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <li class="uk-active"><a href="/"><span class="uk-icon uk-margin-small-right" uk-icon="icon: home"></span>Home</a></li>
+                            <li><a href="#">Item</a></li>
+                        </ul>
+                    </div>
+                    <div class="uk-navbar-right">
+                            <ul class="uk-navbar-nav">
+                                <li>
+                                    <a href="#" data-uk-icon="icon:user"></a>
+                                    <div class="uk-navbar-dropdown uk-navbar-dropdown-bottom-left">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li><a href="{{ url_for('logout') }}"><span data-uk-icon="icon: sign-out"></span> Logout</a></li>
+                                            
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="uk-hidden@m"><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a></li>
+                            </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <section class="uk-section uk-section-large uk-section-secondary" style="background-color: #394a6d">
+        <div class="uk-container uk-container-small uk-text-center">
+            <h1>👋 {{ display_name }}</h1>
+            <p class="uk-text-large">Here you can view details on the SBM meetings, vote on proposals and suggest topics for the next meeting</p>
+        </div>
+    </section>
+    <section class="uk-section">
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-card-hover" style="margin: 0 auto;">
+                <div class="uk-card-badge uk-label" style="background-color: #52de97">New</div>
+                <h3 class="uk-card-title">Next Meeting</h3>
+                <p>{{ next_meeting_text }}</p>
+            </div>
+    </section>
+    <section class="uk-section">
+        <div class="uk-card uk-card-hover uk-card-body uk-width-1-2@m" style="margin: 0 auto">
+                <div class="uk-card-body">
+                        <h3 class="uk-card-title uk-margin-remove-bottom">Pending Proposals</h3>
+                        <p>Review proposals that have been presented/ will be presented in a meeting</p>
+                </div>
+                <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1" uk-slider="center: true">
+                    <!--  Use for new #52de97 -->
+                        <ul class="uk-slider-items uk-grid">
+                            <li class="uk-width-3-4">
+                                <div class="uk-panel">
+                                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
+                                            <div class="uk-card-badge uk-label" style="background-color: red">Old</div>
+                                            <h3 class="uk-card-title">Small</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        </div>
+                                </div>
+                            </li>
+                            <li class="uk-width-3-4">
+                                <div class="uk-panel">
+                                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
+                                            <h3 class="uk-card-title">Small</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        </div>
+                                </div>
+                            </li>
+                            <li class="uk-width-3-4">
+                                <div class="uk-panel">
+                                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
+                                            <h3 class="uk-card-title">Small</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        </div>
+                                </div>
+                            </li>
+                            <li class="uk-width-3-4">
+                                <div class="uk-panel">
+                                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
+                                            <h3 class="uk-card-title">Small</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        </div>
+                                </div>
+                            </li>
+                            <li class="uk-width-3-4">
+                                <div class="uk-panel">
+                                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
+                                            <h3 class="uk-card-title">Small</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        </div>
+                                </div>
+                            </li>
+                        </ul>
+                    
+                        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                    
+                    </div>
+                <div class="uk-card-footer">
+                    <a href="#" class="uk-button uk-button-text">View all</a>
+                </div>
+            </div>
+    </section>
+<footer id="site-foot" class="uk-section uk-section-secondary uk-section-xsmall" uk-sticky="bottom: true" style="background-color: #394a6d">
+        <div class="uk-container uk-text-small uk-text-center">
+            <i class="fas fa-terminal"></i> with <i style="animation: 1.5s heartThrob infinite;padding: 3px;" class="fas fa-heart"></i> by <a href="https://itsmmgamer.tk/">Mauro M.</a>
+        </div>
+    </footer>
+</body>
+</html>
