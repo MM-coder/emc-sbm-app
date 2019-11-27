@@ -1,21 +1,23 @@
 import users # Import custom user module 
 import passwords # Import custom hashing
 import meeting
+import proposals
 import flask
 from flask import Flask, redirect, url_for, render_template, request, session, abort
-import hashlib
+import hashlib, os
 
 
 app = Flask(__name__)
-app.secret_key = b"74 a7 62 83 f4 82 ca b1 78 34"
+app.secret_key = os.urandom(2048)
 
 @app.route('/index')
 @app.route('/')
 def index():
     if 'logged_in' in session:
+        proposals_list = proposals.get_proposals()
         full_name = session['logged_in']['name']
         next_meeting_text = meeting.get_next_meeting_text()
-        return render_template('index.html', next_meeting_text = next_meeting_text, display_name = full_name)
+        return render_template('index.html', next_meeting_text = next_meeting_text, display_name = full_name, proposals_list = proposals_list, count = len(proposals_list))
     else:
         return abort(401) # Http 401 error
 
@@ -31,7 +33,7 @@ def login():
             else:
                 return render_template('login.html', error=True, errortext = "Invalid Username/Password combination! Please try again")
         except:
-            print('here')
+            return render_template('login.html', error=True, errortext = "We couldn't find that user! Please enter a valid username")
     return render_template('login.html', error=False)
 
 

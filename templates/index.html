@@ -21,7 +21,6 @@
                     <div class="uk-navbar-left">
                         <ul class="uk-navbar-nav">
                             <li class="uk-active"><a href="/"><span class="uk-icon uk-margin-small-right" uk-icon="icon: home"></span>Home</a></li>
-                            <li><a href="#">Item</a></li>
                         </ul>
                     </div>
                     <div class="uk-navbar-right">
@@ -64,47 +63,20 @@
                 <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1" uk-slider="center: true">
                     <!--  Use for new #52de97 -->
                         <ul class="uk-slider-items uk-grid">
-                            <li class="uk-width-3-4">
-                                <div class="uk-panel">
-                                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
-                                            <div class="uk-card-badge uk-label" style="background-color: red">Old</div>
-                                            <h3 class="uk-card-title">Small</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            {% for i in proposals_list %}
+                                <li class="uk-width-3-4">
+                                        <div class="uk-panel">
+                                            <div class="uk-card uk-card-default uk-card-small uk-card-body">
+                                                    {% if i['old'] %}
+                                                    <div class="uk-card-badge uk-label" style="background-color: red">Old</div>
+                                                    {% endif %}
+                                                    <h3 class="uk-card-title">{{i['title']}}</h3>
+                                                    <p>{{i['description']}}</p>
+                                                </div>
                                         </div>
-                                </div>
-                            </li>
-                            <li class="uk-width-3-4">
-                                <div class="uk-panel">
-                                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
-                                            <h3 class="uk-card-title">Small</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                </div>
-                            </li>
-                            <li class="uk-width-3-4">
-                                <div class="uk-panel">
-                                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
-                                            <h3 class="uk-card-title">Small</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                </div>
-                            </li>
-                            <li class="uk-width-3-4">
-                                <div class="uk-panel">
-                                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
-                                            <h3 class="uk-card-title">Small</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                </div>
-                            </li>
-                            <li class="uk-width-3-4">
-                                <div class="uk-panel">
-                                    <div class="uk-card uk-card-default uk-card-small uk-card-body">
-                                            <h3 class="uk-card-title">Small</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                </div>
-                            </li>
+                                </li>
+                            {% endfor %}
+                            
                         </ul>
                     
                         <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
@@ -112,7 +84,7 @@
                     
                     </div>
                 <div class="uk-card-footer">
-                    <a href="#" class="uk-button uk-button-text">View all</a>
+                    Showing {{count}} entry(s)
                 </div>
             </div>
     </section>
