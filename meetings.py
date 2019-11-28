@@ -1,3 +1,5 @@
+import json
+
 next_meeting = {"time": "13:40PM", "date": None, "location": None}
 
 def get_next_meeting_text():
@@ -12,3 +14,8 @@ def get_next_meeting_text():
         return f"The next meeting will be on the {date} at the {time} but there isn't a current location set"
     if time == None:
         return f"The next meeting will be on the {date} at {location} but there isn't a current time set"
+
+def get_last_meeting_info():
+    with open('json/lastmeeting.json', 'r+') as f:
+        data = json.load(f)
+    return data

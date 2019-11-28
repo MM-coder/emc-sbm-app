@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='animations.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}"> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css" />
     <!-- UIkit JS -->
@@ -88,10 +89,39 @@
                 </div>
             </div>
     </section>
+    <section class="uk-section">
+        <div>
+            <div class="uk-card uk-card-hover uk-card-body uk-width-1-2@m" style="margin: 0 auto">
+                <h3 class="uk-card-title">Last meeting stats</h3>
+                <p>All data is valid for the meeting of {{ meeting_date }}</p>
+                <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+                        <div>
+                            <div class="uk-card uk-card-default uk-card-body">
+                                <h3 class="uk-card-title">Teachers Attended</h3>
+                                <p style="color: #52de97; font-size: 30px">{{ teachers }}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="uk-card uk-card-default uk-card-body">
+                                <h3 class="uk-card-title">Students Attended</h3>
+                                <p style="color: #52de97; font-size: 30px">{{ students }}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="uk-card uk-card-default uk-card-body">
+                                <h3 class="uk-card-title">Topics Covered</h3>
+                                <p style="color: #52de97; font-size: 30px">{{ topics_covered }}</h4>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
 <footer id="site-foot" class="uk-section uk-section-secondary uk-section-xsmall" uk-sticky="bottom: true" style="background-color: #394a6d">
         <div class="uk-container uk-text-small uk-text-center">
             <i class="fas fa-terminal"></i> with <i style="animation: 1.5s heartThrob infinite;padding: 3px;" class="fas fa-heart"></i> by <a href="https://itsmmgamer.tk/">Mauro M.</a>
         </div>
     </footer>
+
 </body>
 </html>

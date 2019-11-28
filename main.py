@@ -1,6 +1,6 @@
 import users # Import custom user module 
 import passwords # Import custom hashing
-import meeting
+import meetings
 import proposals
 import flask
 from flask import Flask, redirect, url_for, render_template, request, session, abort
@@ -16,8 +16,9 @@ def index():
     if 'logged_in' in session:
         proposals_list = proposals.get_proposals()
         full_name = session['logged_in']['name']
-        next_meeting_text = meeting.get_next_meeting_text()
-        return render_template('index.html', next_meeting_text = next_meeting_text, display_name = full_name, proposals_list = proposals_list, count = len(proposals_list))
+        next_meeting_text = meetings.get_next_meeting_text()
+        last_meeting_obg = meetings.get_last_meeting_info()
+        return render_template('index.html', next_meeting_text = next_meeting_text, display_name = full_name, proposals_list = proposals_list, count = len(proposals_list), teachers = last_meeting_obg['meeting_teachers'], students = last_meeting_obg['meeting_students'], topics_listed = last_meeting_obg['topics_listed'], topics_covered = last_meeting_obg['topics_covered'], meeting_date = last_meeting_obg['meeting_date'])
     else:
         return abort(401) # Http 401 error
 
@@ -25,9 +26,8 @@ def index():
 def login():
     if request.form:
         try:
-            password = users.get_user_password(request.form['username'])
             user_obj = users.get_user_object(request.form['username'])
-            if password == passwords.hash_plain_text(request.form['password']):
+            if user_obj['password'] == passwords.hash_plain_text(request.form['password']):
                 session['logged_in'] = {"user": request.form['username'], "name": user_obj['full_name']}
                 return redirect(url_for('index'))
             else:
