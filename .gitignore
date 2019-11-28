@@ -5,6 +5,8 @@
 # Custom added
 
 /testing
+/files/templates/hi.docx
+/files/templates/hi.pdf
 
 ### Flask ###
 instance/*
