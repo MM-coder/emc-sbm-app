@@ -10,8 +10,8 @@ SBM stands for **S**tudent **B**oard **M**eetings witch are monthly meetings tha
 ### To-do:
 * [x] Make desktop website
 * [ ] Make mobile website
-* [ ] Allow for propsal creation (requires database)
-* [ ] Proposal voting system
+* [ ] Allow for point of order creation
+* [ ] Point of order voting
 * [x] Statistics on the last meeting (based on attendance sheet)
 * [x] User logins
 * [ ] Automatic uploading of a meeting's occurences
