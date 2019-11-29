@@ -8,7 +8,7 @@ import hashlib, os
 
 
 app = Flask(__name__)
-app.secret_key = os.urandom(2048)
+app.secret_key = b"e6 56 5a 5d 5d 31 dc e2 91 9f "
 
 
 def checklogin():
