@@ -1,0 +1,154 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='animations.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}"> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="uk-container">
+            <div class="uk-position-top">
+                <nav class="uk-navbar-container uk-navbar-transparent uk-light" style="margin: 10px;" uk-navbar>
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <li><a href="/"><span class="uk-icon uk-margin-small-right" uk-icon="icon: home"></span>Home</a></li>
+                            <li class="uk-active"><a href="{{ url_for('resources') }}"><span class="uk-icon uk-margin-small-right" uk-icon="icon: image"></span>Resources</a></li>
+                        </ul>
+                    </div>
+                    <div class="uk-navbar-right">
+                            <ul class="uk-navbar-nav">
+                                <li>
+                                    <a href="#" data-uk-icon="icon:user"></a>
+                                    <div class="uk-navbar-dropdown uk-navbar-dropdown-bottom-left">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li><a href="{{ url_for('about') }}"><span data-uk-icon="icon: info"></span> About</a></li>
+                                            <li><a href="{{ url_for('logout') }}"><span data-uk-icon="icon: sign-out"></span> Logout</a></li>
+                                            
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="uk-hidden@m"><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a></li>
+                            </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <section class="uk-section uk-section-large uk-section-secondary" style="background-color: #394a6d">
+        <div class="uk-container uk-container-small uk-text-center">
+            <h1>👋 {{ display_name }}</h1>
+            <p class="uk-text-large">Aqui podes visualizar/descarregar templates e propostas apresentadas</p>
+        </div>
+    </section>
+    <section class = "uk-section">
+        <div class="uk-card uk-card-hover uk-card-body uk-width-1-2@m" style="margin: 0 auto;">
+            <h3 class="uk-card-title">Templates</h3>
+            {% if templates_list|count > 0 %}
+                <table class="uk-table uk-table-middle uk-table-divider" style=" text-align: left;">
+                    <thead>
+                        <tr>
+                            <th class="uk-width-small"></th>
+                            <th>Nome</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in templates_list %}
+                        <tr>
+                            {% if 'pdf' in i %}
+                                <td><span uk-icon="icon: file-pdf"></span></td>
+                            {% elif 'docx' in i %}
+                                <td><span uk-icon="icon: file-text"></span></td>
+                            {% else %}
+                                <td><span uk-icon="icon: question"></span></td>
+                            {% endif %}
+                            <td>{{ i }}</td>
+                            <td><a href="{{ url_for('download_template', path = i) }}"><button class="uk-button uk-button-default" type="button"><span uk-icon="icon: cloud-download" style="padding: 10px; color: #3c9d9b;"></span></button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="text-align: center;">Sem itens</p>
+            {% endif %}
+        </div>
+        <div class="uk-card uk-card-hover uk-card-body uk-width-1-2@m" style="margin: 0 auto;">
+            <h3 class="uk-card-title">Propostas</h3>
+            {% if proposals_list|count > 0 %}
+                <table class="uk-table uk-table-middle uk-table-divider" style=" text-align: left;">
+                    <thead>
+                        <tr>
+                            <th class="uk-width-small"></th>
+                            <th>Nome</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in proposals_list %}
+                        <tr>
+                            {% if 'pdf' in i %}
+                                <td><span uk-icon="icon: file-pdf"></span></td>
+                            {% elif 'docx' in i %}
+                                <td><span uk-icon="icon: file-text"></span></td>
+                            {% else %}
+                                <td><span uk-icon="icon: question"></span></td>
+                            {% endif %}
+                            <td>{{ i }}</td>
+                            <td><a href="{{ url_for('download_proposal', path = i) }}"><button class="uk-button uk-button-default" type="button"><span uk-icon="icon: cloud-download" style="padding: 10px; color: #3c9d9b;"></span></button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="text-align: center;">Sem itens</p>
+            {% endif %}
+        </div>
+        <div class="uk-card uk-card-hover uk-card-body uk-width-1-2@m" style="margin: 0 auto;">
+            <h3 class="uk-card-title">Atas</h3>
+            {% if logs_list|count > 0 %}
+                <table class="uk-table uk-table-middle uk-table-divider" style=" text-align: left;">
+                    <thead>
+                        <tr>
+                            <th class="uk-width-small"></th>
+                            <th>Nome</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in logs_list %}
+                        <tr>
+                            {% if 'pdf' in i %}
+                                <td><span uk-icon="icon: file-pdf"></span></td>
+                            {% elif 'docx' in i %}
+                                <td><span uk-icon="icon: file-text"></span></td>
+                            {% else %}
+                                <td><span uk-icon="icon: question"></span></td>
+                            {% endif %}
+                            <td>{{ i }}</td>
+                            <td><a href="{{ url_for('download_proposal', path = i) }}"><button class="uk-button uk-button-default" type="button"><span uk-icon="icon: cloud-download" style="padding: 10px; color: #3c9d9b;"></span></button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="text-align: center;">Sem itens</p>
+            {% endif %}
+        </div>
+    </section>
+    <footer id="site-foot" class="uk-section uk-section-secondary uk-section-xsmall" uk-sticky="bottom: true" style="background-color: #394a6d">
+        <div class="uk-container uk-text-small uk-text-center">
+            <i class="fas fa-terminal"></i> with <i style="animation: 1.5s heartThrob infinite;padding: 3px;" class="fas fa-heart"></i> by <a href="https://itsmmgamer.tk/">Mauro M.</a>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename='animations.css') }}"> 
+        <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}"> 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css" />
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"></script>
+        <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>      
+        <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+        <script type = "text/javascript" language = "javascript">
+    
+            $(document).ready(function() {
+
+            $("#highlight").click(function(){
+                $("#reasons").effect( "highlight", {color:"#52de97"}, 3000 );
+            });
+            });
+            
+        </script>
+    </head>
+<body>
+    <header>
+        <div class="uk-container">
+            <div class="uk-position-top">
+                <nav class="uk-navbar-container uk-navbar-transparent uk-light" style="margin: 10px;" uk-navbar>
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <li class="uk-active"><a href="/"><span class="uk-icon uk-margin-small-right" uk-icon="icon: home"></span>Home</a></li>
+                            <li><a href="{{ url_for('resources') }}"><span class="uk-icon uk-margin-small-right" uk-icon="icon: image"></span>Recursos</a></li>
+                        </ul>
+                    </div>
+                    <div class="uk-navbar-right">
+                            <ul class="uk-navbar-nav">
+                                <li>
+                                    <a href="#" data-uk-icon="icon:user"></a>
+                                    <div class="uk-navbar-dropdown uk-navbar-dropdown-bottom-left">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li><a href="{{ url_for('about') }}"><span data-uk-icon="icon: info"></span> Sobre</a></li>
+                                            <li><a href="{{ url_for('logout') }}"><span data-uk-icon="icon: sign-out"></span> Logout</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="uk-hidden@m"><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a></li>
+                            </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <section class="uk-section uk-section-large uk-section-secondary" style="background-color: #394a6d">
+        <div class="uk-container uk-container-small uk-text-center">
+            <h1>👋 {{ display_name }}</h1>
+            <p class="uk-text-large">Algumas informações gerais sobre a plataforma</p>
+        </div>
+    </section>
+    <section class="uk-section">
+        <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-width-1-2@m" style="margin: 0 auto;">
+            <h3 class="uk-card-title">Sobre a plataforma</h3>
+            <p id = "reasons">A plataforma foi criada para facilitar a comunicação entre os membros participantes destas reuniões mensais do conselho de alunos</p>
+            <p>A plataforma está programada em HTML + CSS com um back-end de Flask (Python). O front-end usa UiKit para o styling.</p>
+            <a href="https://github.com/MM-coder/emc-sbm-app" class="uk-icon-button uk-margin-small-right" uk-icon="github"></a>
+            <a href="https://getuikit.com/" class="uk-icon-button  uk-margin-small-right" uk-icon="uikit"></a>
+        </div>
+    </section>
+    <section class="uk-section">
+        <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-width-1-2@m" style="margin: 0 auto;">
+            <h3 class="uk-card-title">Sobre mim</h3>
+            <p>Olá eu sou o Mauro, tenho aproximadamente 7 anos de experiência em programação e decidi criar este projeto pelas <a class="uk-link-muted" id = "highlight" href="#reasons" uk-scroll offset = 150>razões acima mencionadas</a>. Eu encaro todos os projetos de programação como uma oportunidade de aprendizagem e este, para e escola, não foi uma excepção. Ironicamente foi bastante educativo, desde de usar o UiKit pela primeira vez (documentação espetacular) até fazer um login flow completamente de raiz.</p>
+            <a href="https://itsmmgamer.tk/" class="uk-icon-button uk-margin-small-right" uk-icon="link"></a>
+            <a href="https://github.com/MM-coder/" class="uk-icon-button uk-margin-small-right" uk-icon="github-alt"></a>
+            <a href="https://reddit.com/u/boringjelly" class="uk-icon-button  uk-margin-small-right" uk-icon="reddit"></a>
+            <a href="https://instagram.com/mauro.m.codes/" class="uk-icon-button  uk-margin-small-right" uk-icon="instagram"></a>
+            <a href="https://twitter.com/mauro_m_rants" class="uk-icon-button  uk-margin-small-right" uk-icon="twitter"></a>
+        </div>
+    </section>
+    <section class="uk-section">
+        <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-width-1-2@m" style="margin: 0 auto;">
+            <h3 class="uk-card-title">Licença</h3>
+            <img src="https://mirrors.creativecommons.org/presskit/buttons/80x15/svg/by-nc-nd.svg" uk-svg>
+            <p>Este código está protegido e foi divulgado ao público sobre o abrigo da licença Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) que pode ser consultada no website da Creative Commons. Qualquiser falha ao cumprir com os termos estipulados na licença vai ser alvo de ação legal pelo criador.</p>
+            <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="uk-icon-button uk-margin-small-right" uk-icon="link"></a>
+        </div>
+    </section>
+    <footer id="site-foot" class="uk-section uk-section-secondary uk-section-xsmall" uk-sticky="bottom: true" style="background-color: #394a6d">
+        <div class="uk-container uk-text-small uk-text-center">
+            <i class="fas fa-terminal"></i> com <i style="animation: 1.5s heartThrob infinite;padding: 3px;" class="fas fa-heart"></i> por <a href="https://itsmmgamer.tk/">Mauro M.</a>
+        </div>
+    </footer>
+</body>
+</html>
