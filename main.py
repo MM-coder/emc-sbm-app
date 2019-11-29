@@ -3,7 +3,7 @@ import passwords # Import custom hashing
 import meetings
 import proposals
 import flask
-from flask import Flask, redirect, url_for, render_template, request, session, abort
+from flask import Flask, redirect, url_for, render_template, request, session, abort, send_file
 import hashlib, os
 
 
@@ -34,7 +34,7 @@ def resources():
     checklogin()
     full_name = session['logged_in']['name']
     templates_list = os.listdir('files/templates')
-    return render_template('resources.html', display_name = full_name, templates_list = templates_list)
+    return render_template('resources.html', display_name = full_name, templates_list = templates_list, proposals_list = os.listdir('files/proposals'), logs_list = os.listdir('files/logs'))
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -55,6 +55,40 @@ def login():
 def logout():
     session.pop('logged_in')
     return redirect(url_for('login'))
+
+
+# File Downloading API
+
+
+@app.route('/api/download_template/<path>')
+def download_template(path):
+        if path != None:
+            try:
+                return send_file('files/templates/' + path, as_attachment=True)
+            except:
+                return abort(500)
+        else:
+            return abort(404)
+
+@app.route('/api/download_log/<path>')
+def download_log(path):
+        if path != None:
+            try:
+                return send_file('files/logs/' + path, as_attachment=True)
+            except:
+                return abort(500)
+        else:
+            return abort(404)
+
+@app.route('/api/download_proposal/<path>')
+def download_proposal(path):
+        if path != None:
+            try:
+                return send_file('files/proposals/' + path, as_attachment=True)
+            except:
+                return abort(500)
+        else:
+            return abort(404)
 
 @app.errorhandler(401)
 def handle_401_error(e):

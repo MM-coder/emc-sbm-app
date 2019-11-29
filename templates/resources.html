@@ -52,30 +52,96 @@
     <section class = "uk-section">
         <div class="uk-card uk-card-hover uk-card-body uk-width-1-2@m" style="margin: 0 auto;">
             <h3 class="uk-card-title">Templates</h3>
-            <table class="uk-table uk-table-middle uk-table-divider">
-                <thead>
-                    <tr>
-                        <th class="uk-width-small"></th>
-                        <th>Filename</th>
-                        <th>Download</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in templates_list %}
-                    <tr>
-                        {% if 'pdf' in i %}
-                            <td><span uk-icon="icon: file-pdf"></span></td>
-                        {% elif 'docx' in i %}
-                            <td><span uk-icon="icon: file-text"></span></td>
-                        {% else %}
-                            <td><span uk-icon="icon: file-question"></span></td>
-                        {% endif %}
-                        <td>{{ i }}</td>
-                        <td><a href="{{'files/templates/' + i}}"><button class="uk-button uk-button-default" type="button"><span uk-icon="icon: cloud-download" style="padding: 10px"></span></button></a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            {% if templates_list|count > 0 %}
+                <table class="uk-table uk-table-middle uk-table-divider" style=" text-align: left;">
+                    <thead>
+                        <tr>
+                            <th class="uk-width-small"></th>
+                            <th>Filename</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in templates_list %}
+                        <tr>
+                            {% if 'pdf' in i %}
+                                <td><span uk-icon="icon: file-pdf"></span></td>
+                            {% elif 'docx' in i %}
+                                <td><span uk-icon="icon: file-text"></span></td>
+                            {% else %}
+                                <td><span uk-icon="icon: question"></span></td>
+                            {% endif %}
+                            <td>{{ i }}</td>
+                            <td><a href="{{ url_for('download_template', path = i) }}"><button class="uk-button uk-button-default" type="button"><span uk-icon="icon: cloud-download" style="padding: 10px; color: #3c9d9b;"></span></button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="text-align: center;">None to display</p>
+            {% endif %}
+        </div>
+        <div class="uk-card uk-card-hover uk-card-body uk-width-1-2@m" style="margin: 0 auto;">
+            <h3 class="uk-card-title">Proposals</h3>
+            {% if proposals_list|count > 0 %}
+                <table class="uk-table uk-table-middle uk-table-divider" style=" text-align: left;">
+                    <thead>
+                        <tr>
+                            <th class="uk-width-small"></th>
+                            <th>Filename</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in proposals_list %}
+                        <tr>
+                            {% if 'pdf' in i %}
+                                <td><span uk-icon="icon: file-pdf"></span></td>
+                            {% elif 'docx' in i %}
+                                <td><span uk-icon="icon: file-text"></span></td>
+                            {% else %}
+                                <td><span uk-icon="icon: question"></span></td>
+                            {% endif %}
+                            <td>{{ i }}</td>
+                            <td><a href="{{ url_for('download_proposal', path = i) }}"><button class="uk-button uk-button-default" type="button"><span uk-icon="icon: cloud-download" style="padding: 10px; color: #3c9d9b;"></span></button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="text-align: center;">None to display</p>
+            {% endif %}
+        </div>
+        <div class="uk-card uk-card-hover uk-card-body uk-width-1-2@m" style="margin: 0 auto;">
+            <h3 class="uk-card-title">Meeting Logs</h3>
+            {% if logs_list|count > 0 %}
+                <table class="uk-table uk-table-middle uk-table-divider" style=" text-align: left;">
+                    <thead>
+                        <tr>
+                            <th class="uk-width-small"></th>
+                            <th>Filename</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in logs_list %}
+                        <tr>
+                            {% if 'pdf' in i %}
+                                <td><span uk-icon="icon: file-pdf"></span></td>
+                            {% elif 'docx' in i %}
+                                <td><span uk-icon="icon: file-text"></span></td>
+                            {% else %}
+                                <td><span uk-icon="icon: question"></span></td>
+                            {% endif %}
+                            <td>{{ i }}</td>
+                            <td><a href="{{ url_for('download_proposal', path = i) }}"><button class="uk-button uk-button-default" type="button"><span uk-icon="icon: cloud-download" style="padding: 10px; color: #3c9d9b;"></span></button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="text-align: center;">None to display</p>
+            {% endif %}
         </div>
     </section>
     <footer id="site-foot" class="uk-section uk-section-secondary uk-section-xsmall" uk-sticky="bottom: true" style="background-color: #394a6d">
