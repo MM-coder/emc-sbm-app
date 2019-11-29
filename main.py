@@ -36,6 +36,15 @@ def resources():
     templates_list = os.listdir('files/templates')
     return render_template('resources.html', display_name = full_name, templates_list = templates_list, proposals_list = os.listdir('files/proposals'), logs_list = os.listdir('files/logs'))
 
+@app.route('/about')
+def about():
+    checklogin()
+    full_name = session['logged_in']['name']
+    return render_template('about.html', display_name = full_name)
+
+
+
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if request.form:

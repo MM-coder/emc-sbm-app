@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - UIkit 3 KickOff</title>
+    <title>Document</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='animations.css') }}"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}"> 
@@ -28,15 +28,14 @@
                     <div class="uk-navbar-right">
                             <ul class="uk-navbar-nav">
                                 <li>
-                                    <a href="#" data-uk-icon="icon:user"></a>
+                                    <a href="" data-uk-icon="icon:user"></a>
                                     <div class="uk-navbar-dropdown uk-navbar-dropdown-bottom-left">
                                         <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li><a href="{{ url_for('about') }}"><span data-uk-icon="icon: info"></span> About</a></li>
                                             <li><a href="{{ url_for('logout') }}"><span data-uk-icon="icon: sign-out"></span> Logout</a></li>
-                                            
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="uk-hidden@m"><a class="uk-navbar-toggle" data-uk-toggle data-uk-navbar-toggle-icon href="#offcanvas-nav"></a></li>
                             </ul>
                     </div>
                 </nav>
