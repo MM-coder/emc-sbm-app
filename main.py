@@ -128,6 +128,10 @@ def download_proposal(path):
 def handle_401_error(e):
     return render_template('login.html', error=True, errortext = "You need to be logged in to do that! (HTTP error 401)")
 
+@app.errorhandler(500)
+def handle_500_error(e):
+    return render_template('500.html')
+
 
 if __name__ == "__main__":
     app.run()
