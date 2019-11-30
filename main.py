@@ -29,7 +29,7 @@ def set_default_lang_if_none():
     try:
         session['language'] # Just get it
     except:
-        session['langauge'] = 'pt'
+        session['language'] = 'pt'
 
 
 @app.route('/index')
@@ -40,6 +40,7 @@ def index():
     full_name = session['logged_in']['name']
     next_meeting_text = meetings.get_next_meeting_text()
     last_meeting_obg = meetings.get_last_meeting_info()
+    set_default_lang_if_none()
     if session['language'] == 'en':
         return render_template('index.html', next_meeting_text = next_meeting_text, display_name = full_name, proposals_list = proposals_list, count = len(proposals_list), teachers = last_meeting_obg['meeting_teachers'], students = last_meeting_obg['meeting_students'], topics_listed = last_meeting_obg['topics_listed'], topics_covered = last_meeting_obg['topics_covered'], meeting_date = last_meeting_obg['meeting_date'])
     else:
@@ -50,6 +51,7 @@ def resources():
     check_login()
     full_name = session['logged_in']['name']
     templates_list = os.listdir('files/templates')
+    set_default_lang_if_none()
     if session['language'] == 'en':
         return render_template('resources.html', display_name = full_name, templates_list = templates_list, proposals_list = os.listdir('files/proposals'), logs_list = os.listdir('files/logs'))
     else:
@@ -60,6 +62,7 @@ def resources():
 def about():
     check_login()
     full_name = session['logged_in']['name']
+    set_default_lang_if_none()
     if session['language'] == 'en':
         return render_template('about.html', display_name = full_name)
     else:
@@ -73,7 +76,6 @@ def login():
             user_obj = users.get_user_object(request.form['username'])
             if user_obj['password'] == passwords.hash_plain_text(request.form['password']):
                 session['logged_in'] = {"user": request.form['username'], "name": user_obj['full_name']}
-                session['language'] = 'pt'
                 return redirect(url_for('index'))
             else:
                 return render_template('login.html', error=True, errortext = "Invalid Username/Password combination! Please try again")
@@ -85,6 +87,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('logged_in')
+    session.pop('language')
     return redirect(url_for('login'))
 
 
