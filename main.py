@@ -132,6 +132,11 @@ def handle_401_error(e):
 def handle_500_error(e):
     return render_template('500.html')
 
+@app.errorhandler(400)
+def handle_500_error(e):
+    return render_template('400.html')
+
+
 
 if __name__ == "__main__":
     app.run()
