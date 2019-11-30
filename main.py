@@ -24,7 +24,7 @@ def switch_language():
         session['language'] = 'pt'
 
 
-@app.before_request()
+@app.before_request
 def set_default_lang_if_none():
     try:
         session['language'] # Just get it
