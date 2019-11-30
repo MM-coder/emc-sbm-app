@@ -134,7 +134,7 @@ def handle_500_error(e):
 
 @app.errorhandler(404)
 def handle_404_error(e):
-    return render_template('400.html')
+    return render_template('404.html')
 
 
 
