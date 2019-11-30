@@ -17,10 +17,18 @@ def check_login():
     else:
         return abort(401)
 
-def switch_langauge():
-    if session['langauge'] == 'pt':
-        session['langauge'] = 'en'
-    elif session['langauge'] == 'en':
+def switch_language():
+    if session['language'] == 'pt':
+        session['language'] = 'en'
+    elif session['language'] == 'en':
+        session['language'] = 'pt'
+
+
+@app.before_request()
+def set_default_lang_if_none():
+    try:
+        session['language'] # Just get it
+    except:
         session['langauge'] = 'pt'
 
 
@@ -32,7 +40,7 @@ def index():
     full_name = session['logged_in']['name']
     next_meeting_text = meetings.get_next_meeting_text()
     last_meeting_obg = meetings.get_last_meeting_info()
-    if session['langauge'] == 'en':
+    if session['language'] == 'en':
         return render_template('index.html', next_meeting_text = next_meeting_text, display_name = full_name, proposals_list = proposals_list, count = len(proposals_list), teachers = last_meeting_obg['meeting_teachers'], students = last_meeting_obg['meeting_students'], topics_listed = last_meeting_obg['topics_listed'], topics_covered = last_meeting_obg['topics_covered'], meeting_date = last_meeting_obg['meeting_date'])
     else:
         return render_template('index_pt.html', next_meeting_text = next_meeting_text, display_name = full_name, proposals_list = proposals_list, count = len(proposals_list), teachers = last_meeting_obg['meeting_teachers'], students = last_meeting_obg['meeting_students'], topics_listed = last_meeting_obg['topics_listed'], topics_covered = last_meeting_obg['topics_covered'], meeting_date = last_meeting_obg['meeting_date'])
@@ -42,7 +50,7 @@ def resources():
     check_login()
     full_name = session['logged_in']['name']
     templates_list = os.listdir('files/templates')
-    if session['langauge'] == 'en':
+    if session['language'] == 'en':
         return render_template('resources.html', display_name = full_name, templates_list = templates_list, proposals_list = os.listdir('files/proposals'), logs_list = os.listdir('files/logs'))
     else:
         return render_template('recursos.html', display_name = full_name, templates_list = templates_list, proposals_list = os.listdir('files/proposals'), logs_list = os.listdir('files/logs'))
@@ -52,12 +60,10 @@ def resources():
 def about():
     check_login()
     full_name = session['logged_in']['name']
-    if session['langauge'] == 'en':
+    if session['language'] == 'en':
         return render_template('about.html', display_name = full_name)
     else:
         return render_template('sobre.html', display_name = full_name)
-
-
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -67,7 +73,7 @@ def login():
             user_obj = users.get_user_object(request.form['username'])
             if user_obj['password'] == passwords.hash_plain_text(request.form['password']):
                 session['logged_in'] = {"user": request.form['username'], "name": user_obj['full_name']}
-                session['lanaguage'] = 'pt'
+                session['language'] = 'pt'
                 return redirect(url_for('index'))
             else:
                 return render_template('login.html', error=True, errortext = "Invalid Username/Password combination! Please try again")
