@@ -39,12 +39,13 @@ def index():
     proposals_list = proposals.get_proposals()
     full_name = session['logged_in']['name']
     next_meeting_text = meetings.get_next_meeting_text()
+    next_meeting_text_pt = meetings.get_next_meeting_text_pt()
     last_meeting_obg = meetings.get_last_meeting_info()
     set_default_lang_if_none()
     if session['language'] == 'en':
         return render_template('index.html', next_meeting_text = next_meeting_text, display_name = full_name, proposals_list = proposals_list, count = len(proposals_list), teachers = last_meeting_obg['meeting_teachers'], students = last_meeting_obg['meeting_students'], topics_listed = last_meeting_obg['topics_listed'], topics_covered = last_meeting_obg['topics_covered'], meeting_date = last_meeting_obg['meeting_date'])
     else:
-        return render_template('index_pt.html', next_meeting_text = next_meeting_text, display_name = full_name, proposals_list = proposals_list, count = len(proposals_list), teachers = last_meeting_obg['meeting_teachers'], students = last_meeting_obg['meeting_students'], topics_listed = last_meeting_obg['topics_listed'], topics_covered = last_meeting_obg['topics_covered'], meeting_date = last_meeting_obg['meeting_date'])
+        return render_template('index_pt.html', next_meeting_text = next_meeting_text_pt, display_name = full_name, proposals_list = proposals_list, count = len(proposals_list), teachers = last_meeting_obg['meeting_teachers'], students = last_meeting_obg['meeting_students'], topics_listed = last_meeting_obg['topics_listed'], topics_covered = last_meeting_obg['topics_covered'], meeting_date = last_meeting_obg['meeting_date'])
 
 @app.route('/resources')
 def resources():
